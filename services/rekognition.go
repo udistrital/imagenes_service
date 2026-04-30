@@ -7,8 +7,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
-	"github.com/udistrital/imagenes_mid/helpers"
-	"github.com/udistrital/imagenes_mid/models"
+	"github.com/udistrital/imagenes_service/helpers"
+	"github.com/udistrital/imagenes_service/models"
 )
 
 // ValidarRostroHumano consulta Amazon Rekognition y determina si la imagen contiene un rostro humano.

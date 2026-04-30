@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	beego "github.com/beego/beego/v2/server/web"
-	"github.com/udistrital/imagenes_mid/helpers"
-	"github.com/udistrital/imagenes_mid/models"
-	"github.com/udistrital/imagenes_mid/services"
+	"github.com/udistrital/imagenes_service/helpers"
+	"github.com/udistrital/imagenes_service/models"
+	"github.com/udistrital/imagenes_service/services"
 )
 
 // DetectarRostroController gestiona la validación de rostros humanos mediante Amazon Rekognition.
