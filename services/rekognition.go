@@ -17,10 +17,7 @@ func ValidarRostroHumano(bytesImagen []byte) (*models.RespuestaValidacionRostro,
 		return nil, helpers.ErrImagenVacia
 	}
 
-	cfg, err := config.LoadDefaultConfig(
-		context.TODO(),
-		config.WithRegion("us-east-1"),
-	)
+	cfg, err := config.LoadDefaultConfig(context.TODO())
 	if err != nil {
 		return nil, errors.New("error cargando configuración de AWS: " + err.Error())
 	}
