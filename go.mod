@@ -1,4 +1,4 @@
-module github.com/udistrital/imagenes_mid
+module github.com/udistrital/imagenes_service
 
 go 1.25.5
 

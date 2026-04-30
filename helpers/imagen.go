@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	"github.com/beego/beego/v2/server/web/context"
-	"github.com/udistrital/imagenes_mid/models"
+	"github.com/udistrital/imagenes_service/models"
 )
 
 var (
