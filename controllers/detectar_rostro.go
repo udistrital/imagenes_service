@@ -7,6 +7,7 @@ import (
 	"github.com/udistrital/imagenes_service/helpers"
 	"github.com/udistrital/imagenes_service/models"
 	"github.com/udistrital/imagenes_service/services"
+	"github.com/udistrital/imagenes_service/utils_oas/errorctrl"
 )
 
 // DetectarRostroController gestiona la validación de rostros humanos mediante Amazon Rekognition.
@@ -24,16 +25,16 @@ type DetectarRostroController struct {
 // @Failure 500 {object} models.RespuestaAPI
 // @router /rostro/validar [post]
 func (c *DetectarRostroController) ValidarRostroHumano() {
+	defer errorctrl.ErrorControlController(c.Controller, "DetectarRostroController/ValidarRostroHumano")
+
 	bytesImagen, err := helpers.ObtenerImagenDesdeSolicitud(c.Ctx)
 	if err != nil {
-		c.responder(http.StatusBadRequest, false, "400", err.Error(), nil)
-		return
+		panic(errorctrl.Error("ValidarRostroHumano - helpers.ObtenerImagenDesdeSolicitud", err, "400"))
 	}
 
 	respuesta, err := services.ValidarRostroHumano(bytesImagen)
 	if err != nil {
-		c.responder(http.StatusInternalServerError, false, "500", err.Error(), nil)
-		return
+		panic(errorctrl.Error("ValidarRostroHumano - services.ValidarRostroHumano", err, "500"))
 	}
 
 	c.responder(http.StatusOK, true, "200", "Request successful", respuesta)
