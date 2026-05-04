@@ -14,7 +14,6 @@ type CustomErrorController struct {
 // Toma el código de estado recibido y utiliza los datos cargados previamente en c.Data
 // para responder un JSON con información homogénea del error.
 func genericError(c *CustomErrorController, status string) {
-	c.EnableRender = false
 	outputError := map[string]interface{}{"Success": false, "Status": status, "Message": c.Data["mesaage"], "Data": c.Data["data"]}
 	c.Data["json"] = outputError
 	c.ServeJSON()
