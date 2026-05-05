@@ -58,12 +58,16 @@ func obtenerImagenMultipart(ctx *context.Context) ([]byte, error) {
 func obtenerImagenBase64(ctx *context.Context) ([]byte, error) {
 	var solicitud models.SolicitudValidacionRostro
 
-	if len(ctx.Input.RequestBody) == 0 {
+	if ctx.Request.Body == nil {
 		return nil, ErrImagenNoEnviada
 	}
 
-	if err := json.Unmarshal(ctx.Input.RequestBody, &solicitud); err != nil {
-		return nil, err
+	if err := json.NewDecoder(ctx.Request.Body).Decode(&solicitud); err != nil {
+		return nil, ErrImagenNoEnviada
+	}
+
+	if strings.TrimSpace(solicitud.ImagenBase64) == "" {
+		return nil, ErrImagenNoEnviada
 	}
 
 	return DecodificarImagenBase64(solicitud.ImagenBase64)
