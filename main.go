@@ -7,6 +7,7 @@ import (
 	"github.com/udistrital/imagenes_service/utils_oas/apistatus"
 	"github.com/udistrital/imagenes_service/utils_oas/auditoria"
 	"github.com/udistrital/imagenes_service/utils_oas/customerror"
+	"github.com/udistrital/imagenes_service/utils_oas/security"
 )
 
 func main() {
@@ -18,19 +19,20 @@ func main() {
 	}
 	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
 		AllowOrigins: allowedOrigins,
-		AllowMethods: []string{"PUT", "PATCH", "GET", "POST", "OPTIONS", "DELETE"},
-		AllowHeaders: []string{"Origin", "x-requested-with",
-			"content-type",
-			"accept",
-			"origin",
-			"authorization",
-			"x-csrftoken"},
+		AllowMethods: []string{"POST"},
+		AllowHeaders: []string{
+			"Accept",
+			"Authorization",
+			"Content-Type",
+			"User-Agent",
+			"X-Amzn-Trace-Id"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
 	}))
 
-	beego.ErrorController(&customerror.CustomErrorController{})
 	apistatus.Init()
 	auditoria.InitMiddleware()
+	beego.ErrorController(&customerror.CustomErrorController{})
+	security.SetSecurityHeaders()
 	beego.Run()
 }

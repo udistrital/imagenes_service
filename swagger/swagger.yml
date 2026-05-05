@@ -1,0 +1,65 @@
+swagger: "2.0"
+info:
+  title: Imágenes Service API
+  description: |
+    API para validación de imágenes mediante Amazon Rekognition.
+  version: 1.0.0
+  termsOfService: http://swagger.io/terms/
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /v1
+paths:
+  /rostro/validar:
+    post:
+      tags:
+      - rostro
+      description: |-
+        Valida si una imagen contiene un rostro humano detectable. Permite multipart/form-data o base64.
+        <br>
+      operationId: DetectarRostroController.ValidarRostroHumano
+      parameters:
+      - in: formData
+        name: imagen
+        description: Imagen a validar en formato JPG, JPEG o PNG
+        type: file
+      - in: body
+        name: body
+        description: Imagen enviada en base64
+        schema:
+          $ref: '#/definitions/models.SolicitudValidacionRostro'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.RespuestaAPI'
+        "400":
+          description: '{object} models.RespuestaAPI'
+        "500":
+          description: '{object} models.RespuestaAPI'
+definitions:
+  models.RespuestaAPI:
+    title: RespuestaAPI
+    type: object
+    properties:
+      Data:
+        $ref: '#/definitions/models.interface'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+  models.SolicitudValidacionRostro:
+    title: SolicitudValidacionRostro
+    type: object
+    properties:
+      imagen_base64:
+        type: string
+  models.interface:
+    title: interface
+    type: object
+tags:
+- name: rostro
+  description: |
+    DetectarRostroController gestiona la validación de rostros humanos mediante Amazon Rekognition.
