@@ -23,7 +23,7 @@ type DetectarRostroController struct {
 // @Success 200 {object} models.RespuestaAPI
 // @Failure 400 {object} models.RespuestaAPI
 // @Failure 500 {object} models.RespuestaAPI
-// @router /rostro/validar [post]
+// @router /validar [post]
 func (c *DetectarRostroController) ValidarRostroHumano() {
 	defer errorctrl.ErrorControlController(c.Controller, "DetectarRostroController/ValidarRostroHumano")
 

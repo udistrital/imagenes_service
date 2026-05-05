@@ -2,3 +2,8 @@
 prueba.env
 
 imagenes_service
+
+# Swagger
+swagger/**
+!swagger/swagger.json
+!swagger/swagger.yml
